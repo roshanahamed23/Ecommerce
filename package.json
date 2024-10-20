@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": ">=20.16.0",
+    "npm": "please-use-npm"
+  },
   "dependencies": {
     "react": "^18",
     "react-dom": "^18",
