@@ -1,3 +1,21 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": ["prettier"],
+  "globals": {
+    "React": "writable"
+  },
+  "rules": {
+    "prettier/prettier": "warn",
+    "no-unused-vars": "warn",
+    "semi": ["error", "always"], // Enforce semicolons
+    "quotes": ["error", "single"], // Enforce single quotes
+    "no-console": "warn", // Allow console, but give a warning
+    "eqeqeq": "error", // Require === and !== instead of == and !=
+    "indent": ["error", 2] // Enforce 2-space indentation
+  },
+  "ignorePatterns": ["node_modules/", ".next/"]
 }
