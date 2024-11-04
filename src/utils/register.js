@@ -2,6 +2,7 @@
 import connectDB from '@/lib/db';
 import User from '@/modals/User';
 import bcrypt from 'bcryptjs';
+import { signIn } from 'next-auth/react';
 
 export async function register(values) {
   try {
@@ -27,4 +28,11 @@ export async function register(values) {
   } catch (error) {
     console.error(error);
   }
+}
+
+export async function logini(formData) {
+  await signIn('credentials', {
+    email: formData.get('email'),
+    password: formData.get('password'),
+  });
 }

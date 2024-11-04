@@ -1,9 +1,11 @@
 'use client';
 import { register } from '@/utils/register';
+import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
 
 export default function SignUp() {
   const formref = useRef();
+  const Router = useRouter();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -13,6 +15,8 @@ export default function SignUp() {
       lastname: formdata.get('last_name'),
       email: formdata.get('email'),
       password: formdata.get('password'),
+    }).then(() => {
+      Router.push('/auth/signin');
     });
     formref.current.reset();
   }

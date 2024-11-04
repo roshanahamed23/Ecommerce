@@ -1,30 +1,30 @@
 'use client';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 
 export default function Login() {
   const formRef = useRef();
-  const router = useRouter();
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsSubmitting(true);
     const formData = new FormData(formRef.current);
 
     const result = await signIn('credentials', {
       email: formData.get('email'),
       password: formData.get('password'),
-      redirect: false, // Ensures signIn doesn’t redirect
+      callbackUrl: '/'
     });
 
     if (result.error) {
       setError(result.error);
     } else {
-      router.push('/');
+      setError(null);
     }
-
     formRef.current.reset();
+    setIsSubmitting(false);
   }
 
   return (
@@ -73,7 +73,6 @@ export default function Login() {
                 id="email"
                 className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4"
                 placeholder="name@company.com"
-                autoComplete="off"
               />
             </div>
           </div>
@@ -110,15 +109,17 @@ export default function Login() {
                 id="password"
                 placeholder="*********"
                 className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4"
-                autoComplete="new-password"
               />
             </div>
           </div>
           <button
             type="submit"
-            className="w-full text-[#FFFFFF] bg-[#4F46E5] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6"
+            disabled={isSubmitting}
+            className={`w-full text-[#FFFFFF] bg-[#4F46E5] ${
+              isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+            } focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6`}
           >
-            Login
+            {isSubmitting ? 'Logging in...' : 'Login'}
           </button>
           <div className="text-sm font-light text-[#6B7280]">
             Don't have an account yet?{' '}

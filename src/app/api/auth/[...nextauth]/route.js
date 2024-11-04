@@ -1,76 +1,88 @@
-import connectDB from '@/lib/db';
-import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import GitHubProvider from 'next-auth/providers/github';
-import bcrypt from 'bcryptjs';
-import User from '@/modals/User';
-import { pages } from 'next/dist/build/templates/app-page';
-import { signIn } from 'next-auth/react';
+  import connectDB from '@/lib/db';
+  import NextAuth from 'next-auth';
+  import bcrypt from 'bcryptjs';
+  import User from '@/modals/User';
+  import Credentials from 'next-auth/providers/credentials';
+  import { MongoDBAdapter } from '@auth/mongodb-adapter';
+  import client from '@/lib/mongoclient';
+  import { v4 as uuid } from 'uuid';
 
-export const authOptions = {
-  secret: process.env.NEXTAUTH_SECRET,
-  providers: [
-    GitHubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
-    }),
-    CredentialsProvider({
-      name: 'Credentials',
-      id: 'credentials',
-      credentials: {
-        email: { label: 'Email', type: 'text' },
-        password: { label: 'Password', type: 'password' },
-      },
-      async authorize(credentials) {
-        await connectDB();
+  const adapter = MongoDBAdapter(client);
 
-        // Locate the user by email
-        const user = await User.findOne({ email: credentials.email });
+  const authOptions = {
+    secret: process.env.NEXTAUTH_SECRET,
+    providers: [
+      Credentials.default({
+        id: 'credentials',
+        name: 'Credentials',
+        type: 'credentials',
+        credentials: {
+          email: { label: 'Email', type: 'text' },
+          password: { label: 'Password', type: 'password' },
+        },
+        authorize: async (credentials) => {
+          await connectDB();
+          const user = await User.findOne({
+            email: credentials?.email,
+          }).select('+password');
 
-        // Check if user exists
-        if (!user) {
-          throw new Error('Invalid email');
+          if (!user) throw new Error('Wrong Email');
+
+          const passwordMatch = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
+
+          if (!passwordMatch) throw new Error('Wrong Password');
+          return user; // This user object will be saved in the session.
+        },
+      }),
+    ],
+    adapter: adapter,
+    callbacks: {
+      async jwt({ token, user, account }) {
+        console.log(account);
+        if (account?.provider === 'credentials') {
+          token.credentials = true; // Flag indicating credentials were used for login
         }
-
-        // Verify password
-        const isValid = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
-
-        if (!isValid) {
-          throw new Error('Invalid password');
-        }
-
-        // Return user object for NextAuth
-        return {
-          id: user._id,
-          email: user.email,
-          name: `${user.firstname} ${user.lastname}`,
-        };
+        return token;
       },
-    }),
-  ],
-  session: {
-    strategy: 'jwt',
-  },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.email = user.email;
-      }
-      return token;
     },
-    async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id;
-        session.user.email = token.email;
-      }
-      return session;
-    },
-  }
-};
+    jwt: {
+      encode: async (params) => {
+        if (params.token?.credentials) {
+          const sessionToken = uuid(); // Generate a unique session token
+          console.log(params.token);
+          if (!params.token.sub) {
+            throw new Error('No user ID found in token');
+          }
 
-const handlers = NextAuth(authOptions);
-export { handlers as GET, handlers as POST };
+          const createdSession = await adapter?.createSession?.({
+            sessionToken: sessionToken,
+            userId: params.token.sub,
+            expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+          });
+
+          if (!createdSession) {
+            throw new Error('Failed to create session');
+          }
+
+          return sessionToken; // Return the newly created session token
+        }
+        return defaultEncode(params); // Use the default encoding if not using credentials
+      },
+      decode: async (params) => {
+        if (params.token?.credentials) {
+          const session = await adapter?.getSession?.(params.token);
+          if (!session || session.expires < new Date()) {
+            throw new Error('invalid or expired session token');
+          }
+          return session;
+        }
+        return defaultDecode(params);
+      },
+    },
+  };
+
+  const handlers = NextAuth.default(authOptions);
+  export { handlers as GET, handlers as POST };
