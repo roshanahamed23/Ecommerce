@@ -15,7 +15,7 @@ export default function Login() {
     const result = await signIn('credentials', {
       email: formData.get('email'),
       password: formData.get('password'),
-      callbackUrl: '/'
+      callbackUrl: '/',
     });
 
     if (result.error) {
