@@ -19,13 +19,11 @@ export async function handler(req, res) {
           .json({ error: 'Category creation failed', success: false });
       }
 
-      return res
-        .status(201)
-        .json({
-          message: 'Category created successfully',
-          success: true,
-          data: category,
-        });
+      return res.status(201).json({
+        message: 'Category created successfully',
+        success: true,
+        data: category,
+      });
     }
 
     if (method === 'GET') {
@@ -70,12 +68,10 @@ export async function handler(req, res) {
         const deleteCategory = await Category.deleteOne({ _id: req.query.id });
 
         if (deleteCategory.deletedCount === 0) {
-          return res
-            .status(404)
-            .json({
-              message: 'Category not found for deletion',
-              success: false,
-            });
+          return res.status(404).json({
+            message: 'Category not found for deletion',
+            success: false,
+          });
         }
 
         return res
@@ -94,12 +90,10 @@ export async function handler(req, res) {
       .json({ message: 'Method Not Allowed', success: false });
   } catch (error) {
     // Catch-all for unexpected server errors
-    res
-      .status(500)
-      .json({
-        message: 'Internal server error',
-        error: error.message,
-        success: false,
-      });
+    res.status(500).json({
+      message: 'Internal server error',
+      error: error.message,
+      success: false,
+    });
   }
 }

@@ -82,12 +82,10 @@ export async function handler(req, res) {
       .json({ success: false, message: 'Method Not Allowed' });
   } catch (error) {
     // Handle all unexpected errors
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: 'Internal Server Error',
-        error: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: 'Internal Server Error',
+      error: error.message,
+    });
   }
 }

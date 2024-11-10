@@ -36,13 +36,11 @@ export async function handler(req, res) {
             .status(404)
             .json({ message: 'No inventory detail found', success: false });
         }
-        return res
-          .status(200)
-          .json({
-            message: 'Inventory detail fetched successfully',
-            success: true,
-            data: inventory,
-          });
+        return res.status(200).json({
+          message: 'Inventory detail fetched successfully',
+          success: true,
+          data: inventory,
+        });
       } else {
         // Fetch all inventory details
         const inventories = await Inventory.find({}).populate('product_id');
@@ -51,35 +49,29 @@ export async function handler(req, res) {
             .status(404)
             .json({ message: 'No inventory details found', success: false });
         }
-        return res
-          .status(200)
-          .json({
-            message: 'Inventory details fetched successfully',
-            success: true,
-            data: inventories,
-          });
+        return res.status(200).json({
+          message: 'Inventory details fetched successfully',
+          success: true,
+          data: inventories,
+        });
       }
     }
 
     if (method === 'DELETE') {
       if (!req.query?.id) {
-        return res
-          .status(400)
-          .json({
-            message: 'Product ID is required for deletion',
-            success: false,
-          });
+        return res.status(400).json({
+          message: 'Product ID is required for deletion',
+          success: false,
+        });
       }
       const deleteInventory = await Inventory.deleteOne({
         product_id: req.query.id,
       });
       if (deleteInventory.deletedCount === 0) {
-        return res
-          .status(404)
-          .json({
-            message: 'Inventory not found for deletion',
-            success: false,
-          });
+        return res.status(404).json({
+          message: 'Inventory not found for deletion',
+          success: false,
+        });
       }
       return res
         .status(200)
@@ -93,20 +85,16 @@ export async function handler(req, res) {
         { stock }
       );
       if (updateInventory.modifiedCount === 0) {
-        return res
-          .status(404)
-          .json({
-            message: 'No product found to update inventory',
-            success: false,
-          });
-      }
-      return res
-        .status(200)
-        .json({
-          message: 'Inventory updated successfully',
-          data: updateInventory,
-          success: true,
+        return res.status(404).json({
+          message: 'No product found to update inventory',
+          success: false,
         });
+      }
+      return res.status(200).json({
+        message: 'Inventory updated successfully',
+        data: updateInventory,
+        success: true,
+      });
     }
 
     // If method not supported
@@ -114,12 +102,10 @@ export async function handler(req, res) {
       .status(405)
       .json({ message: 'Method Not Allowed', success: false });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: 'Internal server error',
-        error: error.message,
-        success: false,
-      });
+    res.status(500).json({
+      message: 'Internal server error',
+      error: error.message,
+      success: false,
+    });
   }
 }
