@@ -1,99 +1,147 @@
+import { NextResponse } from 'next/server';
 import connectDB from '@/lib/db';
 import Category from '@/modals/Category';
 
-export async function handler(req, res) {
-  const { method } = req;
-  await connectDB();
+// Connect to the database before handling requests
 
+// POST: Create a new category
+export async function POST(req) {
   try {
-    if (method === 'POST') {
-      const { name, parent } = req.body;
-      const category = await Category.create({
-        name,
-        parent_category: parent,
-      });
+    await connectDB();
+    const { name, parent } = await req.json(); // Parse request body
+    const category = await Category.create({ name, parent_category: parent });
 
-      if (!category) {
-        return res
-          .status(500)
-          .json({ error: 'Category creation failed', success: false });
-      }
+    if (!category) {
+      return NextResponse.json(
+        { error: 'Category creation failed', success: false },
+        { status: 500 }
+      );
+    }
 
-      return res.status(201).json({
+    return NextResponse.json(
+      {
         message: 'Category created successfully',
         success: true,
         data: category,
-      });
-    }
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: 'Internal server error',
+        error: error.message,
+        success: false,
+      },
+      { status: 500 }
+    );
+  }
+}
 
-    if (method === 'GET') {
-      if (req.query?.id) {
-        const category = await Category.findOne({ _id: req.query.id }).populate(
-          'parent_category'
-        );
+// GET: Fetch category/categories
+export async function GET(req) {
+  try {
+    await connectDB();
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
 
-        if (!category) {
-          return res
-            .status(404)
-            .json({ message: 'Category not found', success: false });
-        }
-
-        return res.status(200).json({ success: true, data: category });
-      } else {
-        const categories = await Category.find().populate('parent_category');
-        return res.status(200).json({ success: true, data: categories });
-      }
-    }
-
-    if (method === 'PUT') {
-      const { id, name, parent } = req.body;
-      const updateCategory = await Category.updateOne(
-        { _id: id },
-        { name, parent_category: parent }
+    if (id) {
+      const category = await Category.findOne({ _id: id }).populate(
+        'parent_category'
       );
 
-      if (updateCategory.modifiedCount === 0) {
-        return res
-          .status(404)
-          .json({ message: 'Category not found for update', success: false });
+      if (!category) {
+        return NextResponse.json(
+          { message: 'Category not found', success: false },
+          { status: 404 }
+        );
       }
 
-      return res
-        .status(200)
-        .json({ message: 'Category updated successfully', success: true });
+      return NextResponse.json({ success: true, data: category });
+    } else {
+      const categories = await Category.find().populate('parent_category');
+      return NextResponse.json({ success: true, data: categories });
     }
-
-    if (method === 'DELETE') {
-      if (req.query?.id) {
-        const deleteCategory = await Category.deleteOne({ _id: req.query.id });
-
-        if (deleteCategory.deletedCount === 0) {
-          return res.status(404).json({
-            message: 'Category not found for deletion',
-            success: false,
-          });
-        }
-
-        return res
-          .status(200)
-          .json({ message: 'Category deleted successfully', success: true });
-      } else {
-        return res
-          .status(400)
-          .json({ message: 'Category ID is required', success: false });
-      }
-    }
-
-    // Method Not Allowed
-    return res
-      .status(405)
-      .json({ message: 'Method Not Allowed', success: false });
   } catch (error) {
-    // Catch-all for unexpected server errors
-    res.status(500).json({
-      message: 'Internal server error',
-      error: error.message,
-      success: false,
-    });
+    return NextResponse.json(
+      {
+        message: 'Internal server error',
+        error: error.message,
+        success: false,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// PUT: Update a category
+export async function PUT(req) {
+  try {
+    await connectDB();
+    const { id, name, parent } = await req.json(); // Parse request body
+    const updateCategory = await Category.updateOne(
+      { _id: id },
+      { name, parent_category: parent }
+    );
+
+    if (updateCategory.modifiedCount === 0) {
+      return NextResponse.json(
+        { message: 'Category not found for update', success: false },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      { message: 'Category updated successfully', success: true },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: 'Internal server error',
+        error: error.message,
+        success: false,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE: Delete a category
+export async function DELETE(req) {
+  try {
+    await connectDB();
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json(
+        { message: 'Category ID is required', success: false },
+        { status: 400 }
+      );
+    }
+
+    const deleteCategory = await Category.deleteOne({ _id: id });
+
+    if (deleteCategory.deletedCount === 0) {
+      return NextResponse.json(
+        { message: 'Category not found for deletion', success: false },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      { message: 'Category deleted successfully', success: true },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: 'Internal server error',
+        error: error.message,
+        success: false,
+      },
+      { status: 500 }
+    );
   }
 }

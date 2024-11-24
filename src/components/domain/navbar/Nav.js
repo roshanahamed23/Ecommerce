@@ -46,6 +46,13 @@ export default function Nav() {
             Users
           </p>
         </Link>
+        <Link href="/category">
+          <p
+            className={`text-white text-2xl flex ${pathname === '/catalog' ? activelink : ''}`}
+          >
+            Category
+          </p>
+        </Link>
       </div>
     </aside>
   );

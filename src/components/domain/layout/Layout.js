@@ -5,9 +5,7 @@ export const Layout = ({ children }) => {
   return (
     <div className="flex">
       <Nav />
-      <div className="flex flex-grow rounded-md p-4 justify-center">
-        {children}
-      </div>
+      <div className="flex flex-grow rounded-md padding">{children}</div>
     </div>
   );
 };

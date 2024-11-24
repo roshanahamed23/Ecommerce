@@ -1,4 +1,6 @@
 'use client';
+
+import { publishUserData } from '@/utils/redispublish';
 import { register } from '@/utils/register';
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
@@ -10,7 +12,7 @@ export default function SignUp() {
   async function handleSubmit(e) {
     e.preventDefault();
     const formdata = new FormData(formref.current);
-    await register({
+    await publishUserData({
       firstname: formdata.get('first_name'),
       lastname: formdata.get('last_name'),
       email: formdata.get('email'),

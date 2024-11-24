@@ -1,91 +1,158 @@
 import connectDB from '@/lib/db';
 import Product from '@/modals/Product';
+import { NextResponse } from 'next/server';
 
-export async function handler(req, res) {
-  const { method } = req;
-  await connectDB();
-
+// Handle GET requests
+export async function GET(req) {
   try {
-    if (method === 'GET') {
-      if (req.query?.id) {
-        // Retrieve a single product by ID
-        const product = await Product.findOne({ _id: req.query.id });
-        if (!product) {
-          return res
-            .status(404)
-            .json({ success: false, message: 'Product not found' });
-        }
-        return res.status(200).json({ success: true, data: product });
-      } else {
-        // Retrieve all products
-        const products = await Product.find({});
-        return res.status(200).json({ success: true, data: products });
-      }
-    }
+    await connectDB();
+    const searchParams = new URL(req.url).searchParams;
+    const id = searchParams.get('id'); // Retrieve ID from query parameters
 
-    if (method === 'POST') {
-      // Create a new product
-      const { name, description, price, image, category_id } = req.body;
-      const product = await Product.create({
-        name,
-        description,
-        price,
-        image,
-        category_id,
+    if (id) {
+      // Retrieve a single product by ID
+      const product = await Product.findOne({ _id: id });
+      if (!product) {
+        return new Response(
+          JSON.stringify({ success: false, message: 'Product not found' }),
+          { status: 404 }
+        );
+      }
+      return new Response(JSON.stringify({ success: true, data: product }), {
+        status: 200,
       });
-      return res.status(201).json({
-        success: true,
-        message: 'Product created successfully',
-        data: product,
+    } else {
+      // Retrieve all products
+      const products = await Product.find({});
+      return new Response(JSON.stringify({ success: true, data: products }), {
+        status: 200,
       });
     }
-
-    if (method === 'PUT') {
-      // Update an existing product
-      const { _id, name, description, price, image, category_id } = req.body;
-      const updatedProduct = await Product.updateOne(
-        { _id },
-        { name, description, price, image, category_id }
-      );
-      if (updatedProduct.nModified === 0) {
-        return res
-          .status(404)
-          .json({ success: false, message: 'Product not found for update' });
-      }
-      return res
-        .status(200)
-        .json({ success: true, message: 'Product updated successfully' });
-    }
-
-    if (method === 'DELETE') {
-      // Delete a product by ID
-      if (!req.query?.id) {
-        return res
-          .status(400)
-          .json({ success: false, message: 'Product ID is required' });
-      }
-      const deletedProduct = await Product.deleteOne({ _id: req.query.id });
-      if (deletedProduct.deletedCount === 0) {
-        return res
-          .status(404)
-          .json({ success: false, message: 'Product not found for deletion' });
-      }
-      return res.status(200).json({
-        success: true,
-        message: `Product (${req.query.id}) deleted successfully`,
-      });
-    }
-
-    // If method not supported
-    return res
-      .status(405)
-      .json({ success: false, message: 'Method Not Allowed' });
   } catch (error) {
-    // Handle all unexpected errors
-    res.status(500).json({
-      success: false,
-      message: 'Internal Server Error',
-      error: error.message,
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: 'Internal Server Error',
+        error: error.message,
+      }),
+      { status: 500 }
+    );
+  }
+}
+
+// Handle POST requests
+export async function POST(req) {
+  try {
+    await connectDB();
+    const body = await req.json(); // Parse JSON body
+    const { name, description, price, image, category_id } = body;
+
+    const product = await Product.create({
+      name,
+      description,
+      price,
+      image,
+      category_id,
     });
+    return NextResponse.json(
+      { success: true, message: 'Product created successfully', data: product },
+      { status: 201 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: 'Internal Server Error',
+        error: error.message,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// Handle PUT requests
+export async function PUT(req) {
+  try {
+    await connectDB();
+    const body = await req.json();
+    const { _id, name, description, price, image, category_id } = body;
+
+    const updatedProduct = await Product.updateOne(
+      { _id },
+      { name, description, price, image, category_id }
+    );
+
+    if (updatedProduct.modifiedCount === 0) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          message: 'Product not found for update',
+          data: updatedProduct,
+        }),
+        { status: 404 }
+      );
+    }
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        message: 'Product updated successfully',
+      }),
+      { status: 200 }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: 'Internal Server Error',
+        error: error.message,
+      }),
+      { status: 500 }
+    );
+  }
+}
+
+// Handle DELETE requests
+export async function DELETE(req) {
+  try {
+    await connectDB();
+    const searchParams = new URL(req.url).searchParams;
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return new Response(
+        JSON.stringify({ success: false, message: 'Product ID is required' }),
+        { status: 400 }
+      );
+    }
+
+    const deletedProduct = await Product.deleteOne({ _id: id });
+
+    if (deletedProduct.deletedCount === 0) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          message: 'Product not found for deletion',
+        }),
+        { status: 404 }
+      );
+    }
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        message: `Product (${id}) deleted successfully`,
+      }),
+      { status: 200 }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: 'Internal Server Error',
+        error: error.message,
+      }),
+      { status: 500 }
+    );
   }
 }

@@ -19,9 +19,45 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+th,
+td {
+  @apply px-6 py-3;
+}
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .padding {
+    @apply sm:px-16 px-8 sm:py-16 py-8;
+  }
+
+  .padding-x {
+    @apply sm:px-16 px-8;
+  }
+
+  .padding-y {
+    @apply sm:py-24 py-12;
+  }
+
+  .padding-l {
+    @apply sm:pl-16 pl-8;
+  }
+
+  .padding-r {
+    @apply sm:pr-16 pr-8;
+  }
+
+  .padding-t {
+    @apply sm:pt-24 pt-12;
+  }
+
+  .padding-b {
+    @apply sm:pb-24 pb-12;
+  }
+}
+@layer components {
+  .subtext {
+    @apply text-xl text-slate-500 underline;
   }
 }

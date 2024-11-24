@@ -23,7 +23,7 @@ const Overview = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="text-xl text-slate-500 underline ">overview details</h3>
+      <h3 className="subtext">Overview Details</h3>
       <div className="flex gap-2">
         {data.map((item, index) => (
           <OverviewCard key={index} {...item} />
