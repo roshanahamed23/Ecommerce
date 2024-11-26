@@ -1,7 +1,6 @@
 'use server';
 import connectDB from '@/lib/db';
 import User from '@/modals/User';
-import bcrypt from 'bcryptjs';
 import { signIn } from 'next-auth/react';
 
 export async function register(values) {
@@ -14,12 +13,12 @@ export async function register(values) {
         error: 'user already exists',
       };
     }
-    const hashpassword = await bcrypt.hash(password, 10);
+
     const user = new User({
       firstname,
       lastname,
       email,
-      password: hashpassword,
+      password,
     });
     const saveduser = await user.save();
     return {

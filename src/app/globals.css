@@ -60,4 +60,7 @@ td {
   .subtext {
     @apply text-xl text-slate-500 underline;
   }
+  .button-sm {
+    @apply px-3 text-white font-semibold py-2 rounded-sm;
+  }
 }

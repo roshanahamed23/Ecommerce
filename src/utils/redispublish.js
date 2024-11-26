@@ -1,8 +1,7 @@
 'use server';
-
-import redis from '@/lib/redis'; // Adjust this to your actual Redis client configuration
-
-export async function publishUserData({ firstname, lastname, email, password }) {
+import redis from '@/lib/redis';
+import bcrypt from 'bcryptjs';
+async function publishUserData({ firstname, lastname, email, password }) {
   try {
     // Validate input data
     if (!firstname || !lastname || !email || !password) {
@@ -12,11 +11,17 @@ export async function publishUserData({ firstname, lastname, email, password }) 
       };
     }
 
+    const hashpassword = await bcrypt.hash(password, 10);
     // Serialize user data
-    const data = JSON.stringify({ firstname, lastname, email, password });
+    const data = JSON.stringify({
+      firstname,
+      lastname,
+      email,
+      password: hashpassword,
+    });
 
     // Publish to Redis channel
-    const subscribersCount = await redis.publish('userdata', data);
+    subscribersCount = await redis.lpush('userdata', data);
 
     // Return based on the number of subscribers
     if (subscribersCount > 0) {
@@ -26,15 +31,17 @@ export async function publishUserData({ firstname, lastname, email, password }) 
       };
     } else {
       return {
-        message: 'No admin is currently listening.',
+        message: 'list is empty',
         success: false,
       };
     }
   } catch (error) {
-    console.error('Error during publishing:', error);
+    console.error('Error during data storing in list:', error);
     return {
-      message: 'An error occurred while publishing data.',
+      message: 'An error occurred while storing data.',
       success: false,
     };
   }
 }
+
+export { publishUserData };

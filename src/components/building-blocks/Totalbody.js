@@ -175,6 +175,33 @@ const Tablebody = ({ index, item, page, categoryData }) => {
     );
   }
 
+  if (page === 'users') {
+    return (
+      <>
+        <td>{index + 1}</td>
+        <td>{item.firstname}</td>
+        <td>{item?.lastname}</td>
+        <td>{item?.email}</td>
+        <td>
+          <div className="flex flex-row gap-2">
+            <Link href="#">
+              <button onClick={
+                async()=>{
+                  if(window.confirm("are your sure what to delete the user admin?")){
+                  await axios.delete(`/api/users?id=${item._id}`)
+                  }
+                }
+              }
+              className="px-3 text-white font-semibold py-2 bg-red-600 rounded-sm">
+                delete
+              </button>
+            </Link>
+          </div>
+        </td>
+      </>
+    );
+  }
+
   return <p>no result found</p>;
 };
 

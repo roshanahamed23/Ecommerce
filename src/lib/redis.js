@@ -1,9 +1,8 @@
-'use server'
-import { Redis } from "@upstash/redis";
+import { Redis } from '@upstash/redis';
 
 const redis = new Redis({
-    url: process.env.REDIS_URL,
-    token: process.env.REDIS_TOKEN
-})
+  url: process.env.REDIS_URL,
+  token: process.env.REDIS_TOKEN,
+});
 
-export default redis
+export default redis;
