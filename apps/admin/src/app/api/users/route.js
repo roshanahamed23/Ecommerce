@@ -1,4 +1,4 @@
-import User from '@/modals/User';   
+import User from '@/modals/User';
 import { NextResponse } from 'next/server';
 
 export async function GET(req) {
@@ -28,7 +28,7 @@ export async function GET(req) {
 }
 
 export async function DELETE(req) {
-  try{
+  try {
     const searchParams = new URL(req.url).searchParams;
     const id = searchParams.get('id');
     const deleteduser = await User.deleteOne({ _id: id });
@@ -39,13 +39,13 @@ export async function DELETE(req) {
       },
       { status: 200 }
     );
-  }catch(error){
+  } catch (error) {
     return NextResponse.json(
-        {
-          message: `deletion failed`,
-          success: false,
-        },
-        { status: 500 }
-      );
+      {
+        message: `deletion failed`,
+        success: false,
+      },
+      { status: 500 }
+    );
   }
 }
