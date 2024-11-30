@@ -115,7 +115,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full text-[#FFFFFF] bg-[#4F46E5] ${
+            className={`w-full text-[#FFFFFF] bg-blue-700 ${
               isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
             } focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6`}
           >
@@ -123,7 +123,10 @@ export default function Login() {
           </button>
           <div className="text-sm font-light text-[#6B7280]">
             Don't have an account yet?{' '}
-            <a href="#" className="font-medium text-[#4F46E5] hover:underline">
+            <a
+              href="/auth/signup"
+              className="font-medium text-[#4F46E5] hover:underline"
+            >
               Sign Up
             </a>
           </div>
