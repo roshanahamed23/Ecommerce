@@ -19,3 +19,9 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer utilities{
+  .semi-head{
+    @apply uppercase font-semibold text-primary-darbar;
+  }
+}

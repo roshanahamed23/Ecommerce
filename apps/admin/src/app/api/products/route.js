@@ -23,7 +23,7 @@ export async function GET(req) {
       });
     } else {
       // Retrieve all products
-      const products = await Product.find({});
+      const products = await Product.find({}).populate('category_id');
       return new Response(JSON.stringify({ success: true, data: products }), {
         status: 200,
       });

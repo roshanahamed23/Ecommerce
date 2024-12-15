@@ -28,7 +28,7 @@ const productSchema =
       category_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
-        required: false, // Optional field
+        required: true, // Optional field
         default: null,
       },
     },
