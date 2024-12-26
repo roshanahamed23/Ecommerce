@@ -14,6 +14,9 @@ const Productslist = ({ heading, category }) => {
       } = useQuery({
         queryKey: ['product', { category }],
         queryFn: productfetch,
+        onSuccess: ()=>{
+          console.log(Products)
+        }
       });
       
   console.log(Products)
@@ -34,14 +37,17 @@ const Productslist = ({ heading, category }) => {
 
         {Products?.data.map((item, index) => {
          if(item.category_id?.name === category){
-          return (<Productcard
-            key={index}
+          return (
+          <div key={index}>
+          <Productcard
             id={item._id}
             name={item.name}
             image={item.image[0]}
             price={item.price}
             category={item.category_id?.name} 
-          />)
+          />
+          </div>
+          )
          }
 })}
       </div>

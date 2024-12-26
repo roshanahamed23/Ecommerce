@@ -12,7 +12,7 @@ module.exports = {
           pink: '#af135c',
           saf: '#f08080',
           brown: '#ddd3c4',
-          darbar: ' '
+          darbar: '#532517'
         },
       },
       animation: {

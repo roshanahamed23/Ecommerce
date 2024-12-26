@@ -14,6 +14,13 @@
   }
 }
 
+th{
+  @apply p-4 bg-primary-brown text-primary-darbar text-lg uppercase;
+}
+td{
+  @apply p-4 bg-white text-sm;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);

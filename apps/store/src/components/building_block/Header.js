@@ -2,8 +2,18 @@
 import Image from 'next/image';
 import React from 'react';
 import { logo,cart } from '../../../public';
+import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
+import { getCartsdetail } from '@/utils/queryfunction';
+import { useSession } from 'next-auth/react';
 
 const Header = () => {
+  const {data:session}=useSession();
+  const {data:carts,isLoading,error}=useQuery({
+    queryKey:['carts',{id:session?.user?.id}],
+    queryFn:()=>getCartsdetail(session?.user?.id),
+    enabled:!!session?.user?.id
+  })
   return (
     <header className="bg-primary-brown dark:bg-gray-900">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -41,12 +51,16 @@ const Header = () => {
                 </a>
               </div>
             </div>
-
-            <div className='hidden md:flex border border-primary-saf bg-primary-saf bg-opacity-30 p-2 rounded-full '>
+            
+            <Link href="/Add_to_Cart">
+            <div className='relative md:flex border border-primary-saf bg-primary-saf bg-opacity-30 p-2 rounded-full '>
+            <div className='bg-primary-darbar text-white rounded-full flex items-center justify-center text-xs p-auto absolute top-0 right-0 left-10 w-6 h-4'>{carts?.data?.length || 0}</div>
             <Image src={cart} className='' alt='Cart' width={30} height={30} />
             </div>
+            </Link>
 
             <div className="block md:hidden">
+            
               <button className="rounded bg-primary-brown p-2 text-gray-600 transition hover:text-gray-600/75 dark:bg-gray-800 dark:text-primary-saf dark:hover:text-primary-saf/75">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -63,6 +77,7 @@ const Header = () => {
                   />
                 </svg>
               </button>
+             
             </div>
           </div>
         </div>

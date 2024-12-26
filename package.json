@@ -16,6 +16,8 @@
   "description": "made by roshanahamed23 - github",
   "packageManager": "npm@10.8.1",
   "dependencies": {
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "lucide-react": "^0.469.0",
+    "uuid": "^11.0.3"
   }
 }
