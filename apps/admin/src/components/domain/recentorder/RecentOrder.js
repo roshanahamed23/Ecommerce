@@ -17,7 +17,7 @@ const RecentOrder = ({ title, thead, body, page, receive }) => {
         <tbody>
           {body?.map((item, index) => {
             return (
-              <tr key={index}>
+              <tr key={index} className='border border-gray-300'>
                 <Tablebody
                   page={page}
                   item={item}
