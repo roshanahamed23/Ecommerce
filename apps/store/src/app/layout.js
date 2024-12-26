@@ -3,7 +3,6 @@ import './globals.css';
 import Layout from '@/components/domain/layout/Layout';
 import Provider from './provider';
 
-
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
   variable: '--font-geist-sans',
@@ -23,17 +22,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Provider>
-        <Layout>
-        {children}
-        </Layout>
+          <Layout>{children}</Layout>
         </Provider>
       </body>
-   
     </html>
   );
 }

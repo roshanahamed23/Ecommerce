@@ -17,7 +17,6 @@ const CheckoutPage = () => {
   const formRef = useRef(null); // Reference for the form
   const queryClient = useQueryClient();
 
-
   const {
     data: Carts,
     isLoading,
@@ -31,11 +30,13 @@ const CheckoutPage = () => {
   });
 
   const mutateOrder = useMutation({
-    mutationFn: async(data) => {
-       return await createOrder(data);
+    mutationFn: async (data) => {
+      return await createOrder(data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['carts', { id: session?.user.id }] });
+      queryClient.invalidateQueries({
+        queryKey: ['carts', { id: session?.user.id }],
+      });
       console.log('Order created successfully');
     },
     onError: () => {
@@ -52,10 +53,34 @@ const CheckoutPage = () => {
   const labelStyles = 'text-[14px] font-[400] text-gray-700';
 
   const indianStates = [
-    'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana',
-    'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur',
-    'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana',
-    'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
+    'Andhra Pradesh',
+    'Arunachal Pradesh',
+    'Assam',
+    'Bihar',
+    'Chhattisgarh',
+    'Goa',
+    'Gujarat',
+    'Haryana',
+    'Himachal Pradesh',
+    'Jharkhand',
+    'Karnataka',
+    'Kerala',
+    'Madhya Pradesh',
+    'Maharashtra',
+    'Manipur',
+    'Meghalaya',
+    'Mizoram',
+    'Nagaland',
+    'Odisha',
+    'Punjab',
+    'Rajasthan',
+    'Sikkim',
+    'Tamil Nadu',
+    'Telangana',
+    'Tripura',
+    'Uttar Pradesh',
+    'Uttarakhand',
+    'West Bengal',
   ];
 
   useEffect(() => {
@@ -69,29 +94,27 @@ const CheckoutPage = () => {
   }, [Carts?.data]);
 
   const handleSubmit = (e) => {
-    try{
-    e.preventDefault();
-    
-    // Collect all form data
-    const formData = new FormData(formRef.current);
-    const dataObject = {};
-    formData.forEach((value, key) => {
-      dataObject[key] = value;
-    });
+    try {
+      e.preventDefault();
 
-    // Add payment method and cart items
-    dataObject.paymentMethod = selectedPayment;
-    dataObject.cartItems = Carts?.data;
-    dataObject.user_id = session?.user.id;
+      // Collect all form data
+      const formData = new FormData(formRef.current);
+      const dataObject = {};
+      formData.forEach((value, key) => {
+        dataObject[key] = value;
+      });
 
-    console.log(dataObject);  // You can replace this with your API call
-    mutateOrder.mutate(dataObject);
-    router.push('/success')
+      // Add payment method and cart items
+      dataObject.paymentMethod = selectedPayment;
+      dataObject.cartItems = Carts?.data;
+      dataObject.user_id = session?.user.id;
+
+      console.log(dataObject); // You can replace this with your API call
+      mutateOrder.mutate(dataObject);
+      router.push('/success');
+    } catch (err) {
+      console.log('error in creating order', err);
     }
-    catch(err){
-      console.log("error in creating order",err)
-    }
-
 
     // Example of sending the data to an API
     // fetch('/api/checkout', {
@@ -247,8 +270,9 @@ const CheckoutPage = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full p-5">
                 <button
                   onClick={(e) => {
-                    e.preventDefault()
-                    setSelectedPayment('cash')}}
+                    e.preventDefault();
+                    setSelectedPayment('cash');
+                  }}
                   className={`flex relative flex-col items-center justify-center p-4 border rounded-lg ${
                     selectedPayment === 'cash'
                       ? 'border-primary-darbar text-primary-darbar'
@@ -257,7 +281,8 @@ const CheckoutPage = () => {
                 >
                   <span
                     className={`absolute top-2 left-2 rounded-full border border-black border-1px h-4 w-4 ${
-                      selectedPayment === 'cash' && 'border-primary-darbar bg-gray-300 shadow-primary-darbar border-5px'
+                      selectedPayment === 'cash' &&
+                      'border-primary-darbar bg-gray-300 shadow-primary-darbar border-5px'
                     }`}
                   ></span>
                   <span className="text-2xl">💵</span>
@@ -334,11 +359,13 @@ const CheckoutPage = () => {
               </div>
             </div>
           </div>
-
         </div>
-        <button onClick={handleSubmit} className="w-full bg-primary-darbar text-white py-3 px-4 rounded-lg hover:bg-primary-brown hover:text-primary-darbar transition-colors">
-              CONFIRM ORDER
-            </button>
+        <button
+          onClick={handleSubmit}
+          className="w-full bg-primary-darbar text-white py-3 px-4 rounded-lg hover:bg-primary-brown hover:text-primary-darbar transition-colors"
+        >
+          CONFIRM ORDER
+        </button>
       </div>
     </div>
   );

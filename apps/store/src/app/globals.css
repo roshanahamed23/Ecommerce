@@ -14,10 +14,10 @@
   }
 }
 
-th{
+th {
   @apply p-4 bg-primary-brown text-primary-darbar text-lg uppercase;
 }
-td{
+td {
   @apply p-4 bg-white text-sm;
 }
 
@@ -27,8 +27,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-@layer utilities{
-  .semi-head{
+@layer utilities {
+  .semi-head {
     @apply uppercase font-semibold text-primary-darbar;
   }
 }

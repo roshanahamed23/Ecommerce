@@ -35,15 +35,15 @@ const Cartpage = () => {
     enabled: !!session?.user?.id,
   });
 
-  useEffect(()=>{
-    setTotal(()=>{
-      let tot=0;
-      Carts?.data.map((item)=>{
-        tot += (item.quantity*item.price);
-      })
+  useEffect(() => {
+    setTotal(() => {
+      let tot = 0;
+      Carts?.data.map((item) => {
+        tot += item.quantity * item.price;
+      });
       return tot;
-    })
-  },[Carts?.data])
+    });
+  }, [Carts?.data]);
 
   function deleteCart(index, carts) {
     try {
@@ -79,11 +79,11 @@ const Cartpage = () => {
     );
   }
 
-  function Placeorder(){  
-    if(!session.user.id){
-      router.push("/auth/signin")
-    }else{
-      router.push('/checkout')
+  function Placeorder() {
+    if (!session.user.id) {
+      router.push('/auth/signin');
+    } else {
+      router.push('/checkout');
     }
   }
 
@@ -139,33 +139,34 @@ const Cartpage = () => {
           </tbody>
         </table>
         <div className="flex flex-col gap-5 p-8 bg-primary-brown w-full lg:w-1/2">
-              <h3 className="font-bold text-primary-darbar text-md tracking-wider ">
-                Sub-Total:{' '}
-                <span className="text-sm font-normal text-slate-800">
-                  Rs.{total}
-                </span>
-              </h3>
-               <h3 className="font-bold text-primary-darbar text-md tracking-wider ">
-               GST(3%):{' '}
-               <span className="text-sm font-normal text-slate-800">
-                 Rs.{(total * 0.03).toFixed(2)}
-               </span>
-             </h3>
-             <h3 className="font-bold text-primary-darbar text-md tracking-wider">
-               Total:{' '}
-               <span className="text-sm font-normal text-slate-800">
-                 Rs.{total + total * 0.03}
-               </span>
-             </h3>
-             <button onClick={Placeorder} className="py-2 px-4 rounded-md bg-primary-darbar transition-all duration-300 hover:border text-primary-darbar text-md  hover:border-primary-darbar hover:bg-primary-brown hover:text-primary-darbar text-white">
-               Place Order
-             </button>
-             </div>
+          <h3 className="font-bold text-primary-darbar text-md tracking-wider ">
+            Sub-Total:{' '}
+            <span className="text-sm font-normal text-slate-800">
+              Rs.{total}
+            </span>
+          </h3>
+          <h3 className="font-bold text-primary-darbar text-md tracking-wider ">
+            GST(3%):{' '}
+            <span className="text-sm font-normal text-slate-800">
+              Rs.{(total * 0.03).toFixed(2)}
+            </span>
+          </h3>
+          <h3 className="font-bold text-primary-darbar text-md tracking-wider">
+            Total:{' '}
+            <span className="text-sm font-normal text-slate-800">
+              Rs.{total + total * 0.03}
+            </span>
+          </h3>
+          <button
+            onClick={Placeorder}
+            className="py-2 px-4 rounded-md bg-primary-darbar transition-all duration-300 hover:border text-primary-darbar text-md  hover:border-primary-darbar hover:bg-primary-brown hover:text-primary-darbar text-white"
+          >
+            Place Order
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Cartpage;
-
-

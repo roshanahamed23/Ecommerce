@@ -8,8 +8,8 @@ import Productcard from '@/components/building_block/Productcard';
 const page = () => {
   return (
     <>
-     <CityGoldHero/>
-     <Productslist heading="New Arrival" category="will"/>
+      <CityGoldHero />
+      <Productslist heading="New Arrival" category="will" />
     </>
   );
 };
