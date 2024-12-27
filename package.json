@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "turbo run dev",
     "prettier": "turbo run prettier",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "build": "turbo run build"
   },
   "workspaces": [
     "./apps/*"
