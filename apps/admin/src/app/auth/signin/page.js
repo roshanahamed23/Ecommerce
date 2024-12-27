@@ -122,7 +122,7 @@ export default function Login() {
             {isSubmitting ? 'Logging in...' : 'Login'}
           </button>
           <div className="text-sm font-light text-[#6B7280]">
-            Don't have an account yet?{' '}
+            Don&apos;t have an account yet?{' '}
             <a
               href="/auth/signup"
               className="font-medium text-[#4F46E5] hover:underline"

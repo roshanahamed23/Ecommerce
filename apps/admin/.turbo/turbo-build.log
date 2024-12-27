@@ -11,22 +11,42 @@ npm warn config ignoring workspace config at C:\Users\ADMIN\Desktop\protfolio\ec
    Linting and checking validity of types ...
  ⨯ ESLint: Failed to load plugin 'next-auth' declared in '.eslintrc.json': Cannot find module 'eslint-plugin-next-auth' Require stack: - C:\Users\ADMIN\Desktop\protfolio\ecommerce\apps\admin\__placeholder__.js
    Collecting page data ...
+   Generating static pages (0/20) ...
+   Generating static pages (5/20) 
+   Generating static pages (10/20) 
+   Generating static pages (15/20) 
+ ✓ Generating static pages (20/20)
+   Finalizing page optimization ...
+   Collecting build traces ...
 
-> Build error occurred
-Error: ENOENT: no such file or directory, open 'C:\Users\ADMIN\Desktop\protfolio\ecommerce\apps\admin\.next\server\pages-manifest.json'
-    at async readManifest (C:\Users\ADMIN\Desktop\protfolio\ecommerce\node_modules\next\dist\build\index.js:191:23)
-    at async (C:\Users\ADMIN\Desktop\protfolio\ecommerce\node_modules\next\dist\build\index.js:1131:33)
-    at async Span.traceAsyncFn (C:\Users\ADMIN\Desktop\protfolio\ecommerce\node_modules\next\dist\trace\trace.js:153:20)
-    at async build (C:\Users\ADMIN\Desktop\protfolio\ecommerce\node_modules\next\dist\build\index.js:361:9) {
-  errno: -4058,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: 'C:\\Users\\ADMIN\\Desktop\\protfolio\\ecommerce\\apps\\admin\\.next\\server\\pages-manifest.json'
-}
-npm error Lifecycle script `build` failed with error:
-npm error code 1
-npm error path C:\Users\ADMIN\Desktop\protfolio\ecommerce\apps\admin
-npm error workspace @ecommerce/admin@0.1.0
-npm error location C:\Users\ADMIN\Desktop\protfolio\ecommerce\apps\admin
-npm error command failed
-npm error command C:\Windows\system32\cmd.exe /d /s /c next build
+Route (app)                              Size     First Load JS
+┌ ○ /                                    103 kB          259 kB
+├ ○ /_not-found                          165 B           100 kB
+├ ƒ /api/auth/[...nextauth]              165 B           100 kB
+├ ƒ /api/categories                      165 B           100 kB
+├ ƒ /api/inventory                       165 B           100 kB
+├ ƒ /api/orderitem                       165 B           100 kB
+├ ƒ /api/orders                          165 B           100 kB
+├ ƒ /api/products                        165 B           100 kB
+├ ƒ /api/subscribe                       165 B           100 kB
+├ ƒ /api/upload                          165 B           100 kB
+├ ƒ /api/users                           165 B           100 kB
+├ ○ /auth/signin                         1.45 kB         111 kB
+├ ○ /auth/signup                         1.76 kB         102 kB
+├ ○ /category                            2.52 kB         149 kB
+├ ○ /inventory                           2.34 kB         149 kB
+├ ○ /orders                              2.76 kB         150 kB
+├ ○ /products                            2.71 kB         150 kB
+├ ○ /products/add                        2.35 kB         135 kB
+├ ƒ /products/delete/[...id]             165 B           100 kB
+├ ƒ /products/edit/[...id]               2.55 kB         135 kB
+└ ○ /users                               2.76 kB         150 kB
++ First Load JS shared by all            100 kB
+  ├ chunks/855-b532e7587c618263.js       45.8 kB
+  ├ chunks/87c73c54-95193ce7bf5ae0e9.js  52.5 kB
+  └ other shared chunks (total)          1.96 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

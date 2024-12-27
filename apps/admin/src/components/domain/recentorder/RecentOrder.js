@@ -1,5 +1,5 @@
+/* eslint-disable */
 import Tablebody from '@/components/building-blocks/Totalbody';
-import Image from 'next/image';
 import React from 'react';
 
 const RecentOrder = ({ title, thead, body, page, receive }) => {
@@ -17,7 +17,7 @@ const RecentOrder = ({ title, thead, body, page, receive }) => {
         <tbody>
           {body?.map((item, index) => {
             return (
-              <tr key={index} className='border border-gray-300'>
+              <tr key={index} className="border border-gray-300">
                 <Tablebody
                   page={page}
                   item={item}

@@ -23,7 +23,7 @@ const Header = () => {
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
-            <a
+            <Link
               className="block text-primary-saf dark:text-primary-saf"
               href="#"
             >
@@ -33,7 +33,7 @@ const Header = () => {
                 width={70}
                 height={70}
               />
-            </a>
+            </Link>
           </div>
 
           <div className="hidden md:block">
@@ -54,20 +54,20 @@ const Header = () => {
 
           <div className="flex items-center gap-4">
             <div className="sm:flex sm:gap-4">
-              <a
+              <Link
                 className="rounded-md bg-primary-saf px-5 py-2.5 text-sm font-medium text-primary-brown shadow dark:hover:bg-teal-500"
                 href="/auth/signin"
               >
                 Login
-              </a>
+              </Link>
 
               <div className="hidden sm:flex">
-                <a
+                <Link
                   className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-primary-saf dark:bg-gray-800 dark:text-primary-saf dark:hover:text-primary-saf/75"
                   href="/auth/signup"
                 >
                   Register
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -110,25 +110,25 @@ const Header = () => {
         <div className="hidden md:flex items-center m-2 w-full justify-center">
           <nav className="">
             <ul className="flex flex-row gap-44">
-              <a href="/">
+              <Link href="/">
                 <li className="semi-head">Home</li>
-              </a>
+              </Link>
 
-              <a href="/">
+              <Link href="/">
                 <li className="semi-head">store</li>
-              </a>
+              </Link>
 
-              <a href="/">
+              <Link href="/">
                 <li className="semi-head">category</li>
-              </a>
+              </Link>
 
-              <a href="/">
+              <Link href="/">
                 <li className="semi-head">account</li>
-              </a>
+              </Link>
 
-              <a href="/">
+              <Link href="/">
                 <li className="semi-head">wishlist</li>
-              </a>
+              </Link>
             </ul>
           </nav>
         </div>

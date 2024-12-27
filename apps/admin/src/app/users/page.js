@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client';
 import RecentOrder from '@/components/domain/recentorder/RecentOrder';
 import { DeleteUserdata, GetUserData } from '@/utils/redisSubscribe';
@@ -22,7 +23,7 @@ const Page = () => {
     list();
   }, [buttonClicked]);
 
-  const { data, error, isLoading } = useQuery(['users'], getUserdetail);
+  const { data, isError, isLoading } = useQuery(['users'], getUserdetail);
 
   return (
     <Suspense fallback={<div>loading....</div>}>

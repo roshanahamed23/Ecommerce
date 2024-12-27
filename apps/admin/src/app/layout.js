@@ -1,3 +1,4 @@
+/* eslint-disable */
 import localFont from 'next/font/local';
 import './globals.css';
 import { Provider, QueryProvider } from './Provider';

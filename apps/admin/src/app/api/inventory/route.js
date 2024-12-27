@@ -12,7 +12,6 @@ export async function POST(req) {
     const { product_id, stock } = body;
 
     const createInventory = await Inventory.create({ product_id, stock });
-    console.log('data:', createInventory);
 
     if (!createInventory) {
       return NextResponse.json(

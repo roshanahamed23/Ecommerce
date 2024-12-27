@@ -1,8 +1,10 @@
 import User from '@/modals/User';
 import { NextResponse } from 'next/server';
+import connectDB from '@/lib/db';
 
-export async function GET(req) {
+export async function GET() {
   try {
+    await connectDB();
     const data = await User.find({});
     return NextResponse.json(
       {
@@ -42,7 +44,7 @@ export async function DELETE(req) {
   } catch (error) {
     return NextResponse.json(
       {
-        message: `deletion failed`,
+        message: 'deletion failed',
         success: false,
       },
       { status: 500 }

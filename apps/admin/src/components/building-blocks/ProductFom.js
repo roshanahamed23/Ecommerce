@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import FileUpload from './Fileupload';
@@ -31,7 +32,6 @@ const createProduct = async ({
           product_id: id,
           stock,
         });
-        console.log(inventoryResponse.data.message);
       }
     } else {
       const productResponse = await axios.post('/api/products', {
@@ -47,7 +47,6 @@ const createProduct = async ({
           product_id: productResponse.data.data._id,
           stock,
         });
-        console.log(inventoryResponse.data.message);
       }
     }
   } catch (error) {

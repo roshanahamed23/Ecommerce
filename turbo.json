@@ -13,7 +13,7 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**"],
       "env": [
         "NEXTAUTH_URL",
         "NEXTAUTH_SECRET",
@@ -29,8 +29,7 @@
         "AUTH_SECRET",
         "AUTH_GOOGLE_ID",
         "AUTH_GOOGLE_SECRET"
-      ],
-      "outputs": [".next/**", "!.next/cache/**"]
+      ]
     }
   }
 }

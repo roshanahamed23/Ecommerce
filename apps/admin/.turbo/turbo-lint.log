@@ -1,0 +1,229 @@
+npm warn config ignoring workspace config at C:\Users\ADMIN\Desktop\protfolio\ecommerce\apps\admin/.npmrc
+
+> @ecommerce/admin@0.1.0 lint
+> next lint
+
+
+./src/app/api/auth/[...nextauth]/route.js
+43:24  Warning: 'user' is defined but never used.  no-unused-vars
+44:7  Warning: Unexpected console statement.  no-console
+55:9  Warning: Unexpected console statement.  no-console
+72:14  Error: 'defaultEncode' is not defined.  no-undef
+82:14  Error: 'defaultDecode' is not defined.  no-undef
+
+./src/app/api/inventory/route.js
+15:5  Warning: Unexpected console statement.  no-console
+
+./src/app/api/orders/route.js
+17:22  Warning: 'req' is defined but never used.  no-unused-vars
+
+./src/app/api/subscribe/route.js
+8:9  Warning: 'encoder' is assigned a value but never used.  no-unused-vars
+12:7  Warning: Unexpected console statement.  no-console
+15:9  Warning: Unexpected console statement.  no-console
+19:9  Warning: Unexpected console statement.  no-console
+24:11  Warning: Unexpected console statement.  no-console
+31:11  Warning: Unexpected console statement.  no-console
+37:9  Warning: Unexpected console statement.  no-console
+42:9  Warning: Unexpected console statement.  no-console
+
+./src/app/api/users/route.js
+4:27  Warning: 'req' is defined but never used.  no-unused-vars
+45:18  Error: Strings must use singlequote.  quotes
+
+./src/app/auth/signin/page.js
+125:16  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./src/app/auth/signup/page.js
+3:10  Warning: 'eventSource' is defined but never used.  no-unused-vars
+5:10  Warning: 'register' is defined but never used.  no-unused-vars
+11:9  Warning: 'Router' is assigned a value but never used.  no-unused-vars
+12:10  Warning: 'isConnected' is assigned a value but never used.  no-unused-vars
+18:7  Warning: Unexpected console statement.  no-console
+22:19  Warning: Assignments to the 'eventSource' variable from inside React Hook useEffect will be lost after each render. To preserve the value over time, store it in a useRef Hook and keep the mutable value in the '.current' property. Otherwise, you can move this variable directly inside useEffect.  react-hooks/exhaustive-deps
+25:7  Warning: Unexpected console statement.  no-console
+34:9  Warning: Unexpected console statement.  no-console
+39:7  Warning: Unexpected console statement.  no-console
+
+./src/app/inventory/page.js
+14:5  Warning: 'error' is assigned a value but never used.  no-unused-vars
+15:5  Warning: 'isLoading' is assigned a value but never used.  no-unused-vars
+
+./src/app/layout.js
+22:38  Error: 'children' is missing in props validation  react/prop-types
+
+./src/app/not-found.js
+9:7  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/app/orders/page.js
+2:8  Warning: 'Tablebody' is defined but never used.  no-unused-vars
+14:5  Warning: Unexpected console statement.  no-console
+25:7  Error: React Hook "useQuery" is called in function "page" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+
+./src/app/page.js
+11:17  Warning: 'session' is assigned a value but never used.  no-unused-vars
+19:6  Warning: React Hook useEffect has missing dependencies: 'router' and 'status'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/app/products/edit/[...id]/page.js
+9:10  Warning: '_key' is assigned a value but never used.  no-unused-vars
+15:18  Error: React Hook "useParams" is called in function "page" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+20:5  Warning: 'error' is assigned a value but never used.  no-unused-vars
+21:5  Warning: 'isLoading' is assigned a value but never used.  no-unused-vars
+22:7  Error: React Hook "useQuery" is called in function "page" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use".  react-hooks/rules-of-hooks
+
+./src/app/products/page.js
+28:9  Warning: Unexpected console statement.  no-console
+
+./src/app/Provider.js
+7:28  Error: 'children' is missing in props validation  react/prop-types
+11:33  Error: 'children' is missing in props validation  react/prop-types
+
+./src/app/users/page.js
+15:25  Warning: 'setButtonClicked' is assigned a value but never used.  no-unused-vars
+25:17  Warning: 'error' is assigned a value but never used.  no-unused-vars
+25:24  Warning: 'isLoading' is assigned a value but never used.  no-unused-vars
+
+./src/components/building-blocks/Button.js
+4:19  Error: 'text' is missing in props validation  react/prop-types
+4:25  Error: 'url' is missing in props validation  react/prop-types
+
+./src/components/building-blocks/Fileupload.js
+8:23  Error: 'ImageData' is missing in props validation  react/prop-types
+8:34  Error: 'trigger' is missing in props validation  react/prop-types
+8:43  Error: 'dataToEdit' is missing in props validation  react/prop-types
+9:10  Warning: 'imageLink' is assigned a value but never used.  no-unused-vars
+23:6  Warning: React Hook useEffect has a missing dependency: 'refreshImg'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+28:34  Error: 'dataToEdit.product_id' is missing in props validation  react/prop-types
+28:46  Error: 'dataToEdit.product_id.image' is missing in props validation  react/prop-types
+29:31  Error: 'dataToEdit.product_id' is missing in props validation  react/prop-types
+29:43  Error: 'dataToEdit.product_id.image' is missing in props validation  react/prop-types
+30:28  Error: 'dataToEdit.product_id' is missing in props validation  react/prop-types
+30:40  Error: 'dataToEdit.product_id.image' is missing in props validation  react/prop-types
+32:6  Warning: React Hook useEffect has a missing dependency: 'ImageData'. Either include it or remove the dependency array. If 'ImageData' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+57:9  Warning: Unexpected console statement.  no-console
+104:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/building-blocks/OverviewCard.js
+3:25  Error: 'title' is missing in props validation  react/prop-types
+3:32  Error: 'price' is missing in props validation  react/prop-types
+
+./src/components/building-blocks/ProductFom.js
+34:9  Warning: Unexpected console statement.  no-console
+50:9  Warning: Unexpected console statement.  no-console
+54:5  Warning: Unexpected console statement.  no-console
+68:24  Error: 'data' is missing in props validation  react/prop-types
+78:26  Error: Strings must use singlequote.  quotes
+78:62  Error: 'data.product_id' is missing in props validation  react/prop-types
+78:73  Error: 'data.product_id.name' is missing in props validation  react/prop-types
+79:49  Error: 'data.product_id' is missing in props validation  react/prop-types
+79:60  Error: 'data.product_id.description' is missing in props validation  react/prop-types
+80:43  Error: 'data.product_id' is missing in props validation  react/prop-types
+80:54  Error: 'data.product_id.price' is missing in props validation  react/prop-types
+81:43  Error: 'data.stock' is missing in props validation  react/prop-types
+82:26  Error: Strings must use singlequote.  quotes
+83:14  Error: 'data.product_id' is missing in props validation  react/prop-types
+83:25  Error: 'data.product_id.category_id' is missing in props validation  react/prop-types
+98:7  Warning: Unexpected console statement.  no-console
+104:5  Warning: 'error' is assigned a value but never used.  no-unused-vars
+105:5  Warning: 'isSuccess' is assigned a value but never used.  no-unused-vars
+106:5  Warning: 'isLoading' is assigned a value but never used.  no-unused-vars
+137:17  Error: 'data.product_id' is missing in props validation  react/prop-types
+137:29  Error: 'data.product_id._id' is missing in props validation  react/prop-types
+
+./src/components/building-blocks/Totalbody.js
+11:10  Warning: '_key' is assigned a value but never used.  no-unused-vars
+16:22  Error: 'index' is missing in props validation  react/prop-types
+16:29  Error: 'item' is missing in props validation  react/prop-types
+16:35  Error: 'page' is missing in props validation  react/prop-types
+16:41  Error: 'categoryData' is missing in props validation  react/prop-types
+18:44  Error: 'item.stock' is missing in props validation  react/prop-types
+30:5  Warning: 'error' is assigned a value but never used.  no-unused-vars
+31:5  Warning: 'isLoading' is assigned a value but never used.  no-unused-vars
+45:6  Warning: React Hook useEffect has a missing dependency: 'categoryData'. Either include it or remove the dependency array. If 'categoryData' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+50:13  Warning: 'inventorydeleted' is assigned a value but never used.  no-unused-vars
+51:38  Error: 'products' is not defined.  no-undef
+53:7  Warning: Unexpected console statement.  no-console
+62:7  Warning: Unexpected console statement.  no-console
+74:32  Error: 'item.product_id' is missing in props validation  react/prop-types
+74:43  Error: 'item.product_id._id' is missing in props validation  react/prop-types
+80:20  Error: 'item.product_id' is missing in props validation  react/prop-types
+80:32  Error: 'item.product_id._id' is missing in props validation  react/prop-types
+81:20  Error: 'item.product_id' is missing in props validation  react/prop-types
+81:32  Error: 'item.product_id.category_id' is missing in props validation  react/prop-types
+82:20  Error: 'item.product_id' is missing in props validation  react/prop-types
+82:32  Error: 'item.product_id.name' is missing in props validation  react/prop-types
+108:19  Error: 'item.product_id' is missing in props validation  react/prop-types
+108:31  Error: 'item.product_id.category_id' is missing in props validation  react/prop-types
+109:20  Error: 'item.product_id' is missing in props validation  react/prop-types
+109:32  Error: 'item.product_id.name' is missing in props validation  react/prop-types
+110:19  Error: 'item.stock' is missing in props validation  react/prop-types
+121:41  Error: 'item.product_id' is missing in props validation  react/prop-types
+121:53  Error: 'item.product_id._id' is missing in props validation  react/prop-types
+129:49  Error: 'item.product_id' is missing in props validation  react/prop-types
+129:61  Error: 'item.product_id._id' is missing in props validation  react/prop-types
+143:19  Error: 'item.name' is missing in props validation  react/prop-types
+144:19  Error: 'item.parent_category' is missing in props validation  react/prop-types
+144:36  Error: 'item.parent_category.name' is missing in props validation  react/prop-types
+155:41  Error: 'item._id' is missing in props validation  react/prop-types
+166:38  Error: 'item._id' is missing in props validation  react/prop-types
+183:19  Error: 'item.firstname' is missing in props validation  react/prop-types
+184:20  Error: 'item.lastname' is missing in props validation  react/prop-types
+185:20  Error: 'item.email' is missing in props validation  react/prop-types
+196:62  Error: 'item._id' is missing in props validation  react/prop-types
+212:14  Warning: '_key' is assigned a value but never used.  no-unused-vars
+216:33  Error: React Hook "useQuery" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+217:47  Error: 'item.order_id' is missing in props validation  react/prop-types
+223:41  Error: 'item.order_id' is missing in props validation  react/prop-types
+229:27  Error: 'item._id' is missing in props validation  react/prop-types
+233:29  Error: 'item.image' is missing in props validation  react/prop-types
+234:29  Error: 'item.name' is missing in props validation  react/prop-types
+238:26  Error: 'item.name' is missing in props validation  react/prop-types
+247:27  Error: 'item._id' is missing in props validation  react/prop-types
+250:26  Error: 'item.quantity' is missing in props validation  react/prop-types
+
+./src/components/domain/inventory/InventoryCard.js
+5:26  Error: 'table' is missing in props validation  react/prop-types
+15:32  Error: 'table.filter' is missing in props validation  react/prop-types
+18:16  Error: 'table.filter' is missing in props validation  react/prop-types
+
+./src/components/domain/layout/Layout.js
+4:26  Error: 'children' is missing in props validation  react/prop-types
+
+./src/components/domain/recentorder/RecentOrder.js
+2:8  Warning: 'Image' is defined but never used.  no-unused-vars
+5:24  Error: 'title' is missing in props validation  react/prop-types
+5:31  Error: 'thead' is missing in props validation  react/prop-types
+5:38  Error: 'body' is missing in props validation  react/prop-types
+5:44  Error: 'page' is missing in props validation  react/prop-types
+5:50  Error: 'receive' is missing in props validation  react/prop-types
+12:21  Error: 'thead.map' is missing in props validation  react/prop-types
+18:18  Error: 'body.map' is missing in props validation  react/prop-types
+
+./src/utils/connectsubscribe.js
+8:14  Error: 'Promise' is not defined.  no-undef
+13:9  Warning: Unexpected console statement.  no-console
+17:7  Warning: Unexpected console statement.  no-console
+29:5  Warning: Unexpected console statement.  no-console
+31:5  Warning: Unexpected console statement.  no-console
+41:14  Error: 'Promise' is not defined.  no-undef
+
+./src/utils/redispublish.js
+24:5  Error: 'subscribersCount' is not defined.  no-undef
+27:9  Error: 'subscribersCount' is not defined.  no-undef
+39:5  Warning: Unexpected console statement.  no-console
+
+./src/utils/register.js
+23:11  Warning: 'saveduser' is assigned a value but never used.  no-unused-vars
+28:5  Warning: Unexpected console statement.  no-console
+
+./src/utils/totalUploads.js
+16:5  Warning: Unexpected console statement.  no-console
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/building-your-application/configuring/eslint#disabling-rules
+npm error Lifecycle script `lint` failed with error:
+npm error code 1
+npm error path C:\Users\ADMIN\Desktop\protfolio\ecommerce\apps\admin
+npm error workspace @ecommerce/admin@0.1.0
+npm error location C:\Users\ADMIN\Desktop\protfolio\ecommerce\apps\admin
+npm error command failed
+npm error command C:\Windows\system32\cmd.exe /d /s /c next lint

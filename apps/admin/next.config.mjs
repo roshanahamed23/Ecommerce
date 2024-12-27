@@ -15,8 +15,7 @@ const nextConfig = {
     UPSTASH_URL: process.env.UPSTASH_URL,
     REDIS_URL: process.env.REDIS_URL,
     REDIS_TOKEN: process.env.REDIS_TOKEN,
-  }
-
+  },
 };
 
 export default nextConfig;

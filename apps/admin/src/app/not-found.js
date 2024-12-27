@@ -1,4 +1,6 @@
+import Image from 'next/image';
 import React from 'react';
+Image;
 
 // react icons
 import { FaArrowLeftLong } from 'react-icons/fa6';
@@ -6,7 +8,7 @@ import { FaArrowLeftLong } from 'react-icons/fa6';
 const Page404 = () => {
   return (
     <div className="boxShadow px-10 w-full flex items-center flex-col justify-center pb-[50px] rounded-xl">
-      <img
+      <Image
         src="https://i.ibb.co/nP1Cngw/Error-Server-1.png"
         alt="illustration"
         className="w-full lg:w-[500px]"

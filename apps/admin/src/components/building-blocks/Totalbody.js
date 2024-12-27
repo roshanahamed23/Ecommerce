@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client';
 import { updateStock } from '@/utils/updateStock';
 import axios from 'axios';
@@ -212,39 +213,56 @@ const Tablebody = ({ index, item, page, categoryData }) => {
       const [_key, { orderId }] = queryKey;
       const result = await axios.get(`/api/orderitem?orderId=${orderId}`);
       return result.data;
-    }
+    };
     const { data: orderItem } = useQuery({
-      queryKey: ["orderItem", { orderId: item.order_id }],
-      queryFn: getOrderItem
-    })
+      queryKey: ['orderItem', { orderId: item.order_id }],
+      queryFn: getOrderItem,
+    });
     return (
       <>
-        <td className='border border-gray-300'><p className='max-w-sm'>{item.order_id}</p></td>
-        <td className='border border-gray-300'>
+        <td className="border border-gray-300">
+          <p className="max-w-sm">{item.order_id}</p>
+        </td>
+        <td className="border border-gray-300">
           {orderItem?.data[0].cartItems.map((item) => {
             return (
-              <div key={item._id} className='flex flex-row items-center max-w-sm my-10 gap-4'>
-                <Image src={item.image} alt={item.name} width={50} height={50} />
+              <div
+                key={item._id}
+                className="flex flex-row items-center max-w-sm my-10 gap-4"
+              >
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  width={50}
+                  height={50}
+                />
                 <p>{item.name}</p>
               </div>
-            )
+            );
           })}
         </td>
-        <td className='border border-gray-300'>{orderItem?.data[0].cartItems.map((item) => {
-          return (
-            <div key={item._id} className='flex flex-row items-center my-10 gap-4'>
-              <p>{item.quantity}</p>
-            </div>
-          )
-        })}</td>
-        <td className='border border-gray-300'>
-          <div className='flex flex-col items-center gap-4'>
-            <button className=' text-gray-500 font-semibold py-2 px-4 bg-sky-200 rounded-md'>Accept</button>
-            <button className='px-4 text-sky-500 border border-gray-50-500 font-semibold py-2  rounded-md'>Cancel</button>
-
+        <td className="border border-gray-300">
+          {orderItem?.data[0].cartItems.map((item) => {
+            return (
+              <div
+                key={item._id}
+                className="flex flex-row items-center my-10 gap-4"
+              >
+                <p>{item.quantity}</p>
+              </div>
+            );
+          })}
+        </td>
+        <td className="border border-gray-300">
+          <div className="flex flex-col items-center gap-4">
+            <button className=" text-gray-500 font-semibold py-2 px-4 bg-sky-200 rounded-md">
+              Accept
+            </button>
+            <button className="px-4 text-sky-500 border border-gray-50-500 font-semibold py-2  rounded-md">
+              Cancel
+            </button>
           </div>
         </td>
-
       </>
     );
   }

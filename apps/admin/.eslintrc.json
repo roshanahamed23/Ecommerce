@@ -4,7 +4,7 @@
     "eslint:recommended",
     "plugin:react/recommended"
   ],
-  "plugins": ["prettier", "next-auth"],
+  "plugins": ["prettier"],
   "globals": {
     "React": "writable"
   },

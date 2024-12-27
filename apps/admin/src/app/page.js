@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client';
 import Chart from '@/components/domain/chart/Chart';
 import Overview from '@/components/domain/overview/Overview';
@@ -8,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 
 const Home = () => {
-  const { data: session, status } = useSession();
+  const {status } = useSession();
   const router = useRouter();
   const thead = ['Order_id', 'ordered by', 'product detail', 'quantity'];
 

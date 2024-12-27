@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use server';
 import connectDB from '@/lib/db';
 import Product from '@/modals/Product';

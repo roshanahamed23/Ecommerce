@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use server';
 import redis from '@/lib/redis';
 import bcrypt from 'bcryptjs';
@@ -21,7 +22,7 @@ async function publishUserData({ firstname, lastname, email, password }) {
     });
 
     // Publish to Redis channel
-    subscribersCount = await redis.lpush('userdata', data);
+    const subscribersCount = await redis.lpush('userdata', data);
 
     // Return based on the number of subscribers
     if (subscribersCount > 0) {

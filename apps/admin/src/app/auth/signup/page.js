@@ -1,50 +1,46 @@
 'use client';
 
-import { eventSource } from '@/utils/connectsubscribe';
 import { publishUserData } from '@/utils/redispublish';
-import { register } from '@/utils/register';
-import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-
+import { useRef } from 'react';
 export default function SignUp() {
   const formref = useRef();
-  const Router = useRouter();
-  const [isConnected, setIsConnected] = useState(false);
-  const udata = [];
-  let eventSource;
+  // const Router = useRouter();
+  // const [isConnected, setIsConnected] = useState(false);
+  // const udata = [];
+  // let eventSource;
 
-  useEffect(() => {
-    if (!window.EventSource) {
-      console.error('EventSource is not supported in your browser.');
-      return;
-    }
+  // useEffect(() => {
+  //   if (!window.EventSource) {
+  //     console.error('EventSource is not supported in your browser.');
+  //     return;
+  //   }
 
-    eventSource = new EventSource('/api/subscribe');
+  //   eventSource = new EventSource('/api/subscribe');
 
-    eventSource.onopen = () => {
-      console.log('Connected to SSE');
-      setIsConnected(true);
-    };
+  //   eventSource.onopen = () => {
+  //     console.log('Connected to SSE');
+  //     setIsConnected(true);
+  //   };
 
-    eventSource.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data);
-        udata.push(data);
-      } catch (error) {
-        console.error('Error parsing event data:', error);
-      }
-    };
+  //   eventSource.onmessage = (event) => {
+  //     try {
+  //       const data = JSON.parse(event.data);
+  //       udata.push(data);
+  //     } catch (error) {
+  //       console.error('Error parsing event data:', error);
+  //     }
+  //   };
 
-    eventSource.onerror = () => {
-      console.error('Error in EventSource connection');
-      setIsConnected(false);
-      eventSource.close();
-    };
+  //   eventSource.onerror = () => {
+  //     console.error('Error in EventSource connection');
+  //     setIsConnected(false);
+  //     eventSource.close();
+  //   };
 
-    return () => {
-      eventSource.close();
-    };
-  }, []);
+  //   return () => {
+  //     eventSource.close();
+  //   };
+  // }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();

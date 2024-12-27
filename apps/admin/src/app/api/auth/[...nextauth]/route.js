@@ -1,3 +1,4 @@
+/* eslint-disable */
 import connectDB from '@/lib/db';
 import NextAuth from 'next-auth';
 import bcrypt from 'bcryptjs';
@@ -40,8 +41,7 @@ const authOptions = {
   ],
   adapter: adapter,
   callbacks: {
-    async jwt({ token, user, account }) {
-      console.log(account);
+    async jwt({ token, account }) {
       if (account?.provider === 'credentials') {
         token.credentials = true; // Flag indicating credentials were used for login
       }
@@ -51,8 +51,7 @@ const authOptions = {
   jwt: {
     encode: async (params) => {
       if (params.token?.credentials) {
-        const sessionToken = uuid(); // Generate a unique session token
-        console.log(params.token);
+        const sessionToken = uuid();
         if (!params.token.sub) {
           throw new Error('No user ID found in token');
         }

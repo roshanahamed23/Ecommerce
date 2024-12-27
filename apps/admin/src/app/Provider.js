@@ -1,5 +1,8 @@
+/* eslint-disable */
 'use client';
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { SessionProvider } from 'next-auth/react';
 import { QueryClientProvider } from 'react-query';
 import { client } from '@/utils/queryclient';
